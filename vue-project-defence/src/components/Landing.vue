@@ -19,9 +19,9 @@ export default {
 
 <style scoped>
 .landing {
-    background: url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80');
+    background-image: url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80');
     background-size: cover;
-    width: 100%;
-    height: 100%;
+    background-attachment: fixed;
+    background-size: 100% 100%;
 }
 </style>
