@@ -23,9 +23,11 @@ export default {
     AppFooter
   },
 
-  data: () => ({
-    //
-  })
+  data() {
+    return {
+
+    }
+  }
 };
 </script>
 

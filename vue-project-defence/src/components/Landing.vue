@@ -1,9 +1,9 @@
 <template>
     <v-container fluid fill-height class="landing" style="max-height: 100vh;">
         <v-layout justify-center align-center column pa-5>
-            <div class="display-4 white--text">HEALTHY MEALS</div>
-            <div class="display-4 white--text">FOR YOUR TABLE</div>
-            <div class="display-1 white--text">Finally be a foodie at home with fresh, chef-prepared meals delivered daily to your door.</div>
+            <div class="display-4 white--text font-weight-bold">HEALTHY MEALS</div>
+            <div class="display-4 white--text font-weight-bold">FOR YOUR TABLE</div>
+            <div class="display-1 white--text">Finally find a place where you can get all of your recipes at once.</div>
             <v-btn class="green lighten-1">
             <v-icon color="white">expand_more</v-icon>
             </v-btn>
