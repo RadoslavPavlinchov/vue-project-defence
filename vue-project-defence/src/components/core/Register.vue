@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submitHandler">
     <fieldset>
-      <h1>Sign In</h1>
+      <h1>Registration</h1>
 
       <p class="field field-icon">
         <label for="username">
@@ -21,6 +21,28 @@
 
       <template v-if="$v.username.$error">
         <p v-if="!$v.username.required" class="error">Username is required!</p>
+        <p v-if="!$v.username.alphanumeric" class="error">Invalid username!</p>
+      </template>
+
+      <p class="field field-icon">
+        <label for="email">
+          <span>
+            <i class="fas fa-envelope"></i>
+          </span>
+        </label>
+        <input
+          type="text"
+          name="email"
+          id="email"
+          v-model="email"
+          @blur="$v.email.$touch"
+          placeholder="marg@gmial.com"
+        />
+      </p>
+
+      <template v-if="$v.email.$error">
+        <p v-if="!$v.email.required" class="error">Email is required!</p>
+        <p v-if="!$v.email.email" class="error">Invalid email!</p>
       </template>
 
       <p class="field field-icon">
@@ -41,6 +63,32 @@
 
       <template v-if="$v.password.$error">
         <p v-if="!$v.password.required" class="error">Password is required!</p>
+        <p v-else-if="!$v.password.alphanumeric" class="error">Invalid password!</p>
+        <p v-else-if="!$v.password.minLength" class="error">Password should be atleast 3 symbols!</p>
+        <p
+          v-else-if="!$v.password.maxLength"
+          class="error"
+        >Password should be no more than 16 symbols!</p>
+      </template>
+
+      <p class="field field-icon">
+        <label for="re-password">
+          <span>
+            <i class="fas fa-lock"></i>
+          </span>
+        </label>
+        <input
+          type="password"
+          name="re-password"
+          id="re-password"
+          v-model="rePassword"
+          @blur="$v.rePassword.$touch"
+          placeholder="******"
+        />
+      </p>
+
+      <template v-if="$v.rePassword.$error">
+        <p v-if="!$v.password.sameAs" class="error">Passwords do not match!</p>
       </template>
 
       <p>
@@ -48,8 +96,8 @@
       </p>
 
       <p class="text-center">
-        Don't have an account?
-        <a href>Register</a>
+        Have an account?
+        <a href>Sign In</a>
       </p>
     </fieldset>
   </form>
@@ -57,30 +105,53 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required } from "vuelidate/lib/validators";
+import {
+  required,
+  email,
+  sameAs,
+  minLength,
+  maxLength,
+  helpers
+} from "vuelidate/lib/validators";
+
+const alphanumeric = helpers.regex("alpha", /^[a-zA-Z0-9]*$/);
 
 export default {
-  name: "AppSignIn",
+  name: "AppRegister",
+  components: {},
   mixins: [validationMixin],
   data() {
     return {
       username: "",
-      password: ""
+      email: "",
+      password: "",
+      rePassword: ""
     };
   },
   validations: {
     username: {
       required,
+      alphanumeric
+    },
+    email: {
+      required,
+      email
     },
     password: {
       required,
+      minLength: minLength(3),
+      maxLength: maxLength(16),
+      alphanumeric
+    },
+    rePassword: {
+      sameAs: sameAs("password")
     }
   },
   methods: {
     submitHandler() {
       this.$v.$touch();
       if (this.$v.$error) { return; }
-      console.log(this.username, this.password);
+      console.log(this.username, this.password, this.email, this.rePassword);
     }
   }
 };

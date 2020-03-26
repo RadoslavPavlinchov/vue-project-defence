@@ -17,7 +17,7 @@
       <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2">All Recipes</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <v-btn color="green lighten-1" class="hidden-sm-and-down">SIGN IN</v-btn>
-      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2">JOIN</v-btn>
+      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2">Register</v-btn>
     </v-app-bar>
   </span>
 </template>
