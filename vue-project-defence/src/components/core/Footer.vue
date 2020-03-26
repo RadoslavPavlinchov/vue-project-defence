@@ -1,7 +1,12 @@
 <template>
-    <v-container>
-        <div>This is a Footer</div>
-    </v-container>
+  <v-footer absolute color="green darken-3" dark>
+    <v-col
+      class="text-center"
+      cols="12"
+    >
+      {{ new Date().getFullYear() }} — <strong>Taste The Healthy Ones</strong>
+    </v-col>
+  </v-footer>
 </template>
 
 <script>

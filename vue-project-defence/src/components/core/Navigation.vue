@@ -13,12 +13,14 @@
     <v-app-bar color="green darken-3" dark>
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
-      <v-toolbar-title>{{appTitle}}</v-toolbar-title>
-      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2">All Recipes</v-btn>
+      <router-link to="/"><v-toolbar-title>{{appTitle}}</v-toolbar-title></router-link>
+      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/categories">All Recipes</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
-      <v-btn color="green lighten-1" class="hidden-sm-and-down">SIGN IN</v-btn>
-      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2">Register</v-btn>
+      <router-link to="/recipedetails">Product</router-link>
+      <v-btn color="green lighten-1" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
+      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/register">Register</v-btn>
     </v-app-bar>
+        <router-view></router-view>
   </span>
 </template>
 
@@ -38,4 +40,9 @@ export default {
 </script>
 
 <style scoped>
+.v-toolbar__title{
+  color: white;
+  text-decoration: none;
+  text-decoration-thickness: none;
+}
 </style>

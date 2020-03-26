@@ -44,7 +44,7 @@
       </template>
 
       <p>
-        <button>Create Account</button>
+        <button @click="login()">Create Account</button>
       </p>
 
       <p class="text-center">
@@ -81,6 +81,9 @@ export default {
       this.$v.$touch();
       if (this.$v.$error) { return; }
       console.log(this.username, this.password);
+    },
+    login() {
+      this.$router.push('/')
     }
   }
 };
