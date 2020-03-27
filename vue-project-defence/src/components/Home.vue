@@ -1,5 +1,6 @@
 <template>
     <span>
+        <app-recipes></app-recipes>
         <app-landing></app-landing>
         <app-landing-details></app-landing-details>
         <app-categories></app-categories>
@@ -10,6 +11,7 @@
 import AppLanding from '@/components/Landing';
 import AppLandingDetails from '@/components/LandingDetails';
 import AppCategories from '@/components/Categories';
+import AppRecipes from '@/components/core/Recipes';
 
 export default {
     name: 'AppHome',
@@ -17,6 +19,7 @@ export default {
         AppLanding,
         AppLandingDetails,
         AppCategories,
-    }
+        AppRecipes
+    },
 };
 </script>

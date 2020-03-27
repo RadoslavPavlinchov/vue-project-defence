@@ -14,7 +14,7 @@
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
       <router-link to="/"><v-toolbar-title>{{appTitle}}</v-toolbar-title></router-link>
-      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/categories">All Recipes</v-btn>
+      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/categories">All Categories</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <router-link to="/recipedetails">Product</router-link>
       <v-btn color="green lighten-1" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
