@@ -43,6 +43,5 @@ export default {
 .v-toolbar__title{
   color: white;
   text-decoration: none;
-  text-decoration-thickness: none;
 }
 </style>

@@ -1,16 +1,9 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
-import routes from './routes'
+import router from './plugins/router'
 
 Vue.config.productionTip = false
-Vue.use(VueRouter)
-
-const router = new VueRouter({
-  mode: 'history',
-  routes
-})
 
 new Vue({
   vuetify,
