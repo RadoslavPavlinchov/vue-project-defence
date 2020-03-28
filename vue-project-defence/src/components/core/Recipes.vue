@@ -2,13 +2,14 @@
   <div class="recipes">
     <h1>Recipes Page</h1>
     <div class="recipe-container">
-      <div v-for="recipe in recipes" :key="recipe.name">
+      <div v-for="recipe in allRecipes" :key="recipe.id">
         <div class="recipe-box">
-          <img :src="recipe.thumbnail" />
+          <!-- <img :src="recipe.thumbnail" /> -->
           <div>
-            <h3>{{recipe.name}}</h3>
-            {{recipe.ingredients}}
+            <h3>{{recipe.title}}</h3>
+            {{recipe.body}}
           </div>
+          <button @click="deleteRecipe(recipe.id)">Delete</button>
         </div>
       </div>
     </div>
@@ -16,71 +17,17 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: "AppRecipes",
-
   components: {},
-  data() {
-    return {
-      recipes: [
-        {
-          name: "Musaka0",
-          ingredients:
-            "potatoes, yogurt, mince, mince, potatoes, yogurt, mince",
-          thumbnail:
-            "https://images.unsplash.com/photo-1584844600340-15e83072127e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80",
-          categoty: "Vegeterian"
-        },
-        {
-          name: "Musaka1",
-          ingredients:
-            "potatoes, yogurt, mince, mince, potatoes, yogurt, mince",
-          thumbnail:
-            "https://images.unsplash.com/photo-1584844600340-15e83072127e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80",
-          categoty: "Vegeterian"
-        },
-        {
-          name: "Musaka2",
-          ingredients:
-            "potatoes, yogurt, mince, mince, potatoes, yogurt, mince",
-          thumbnail:
-            "https://images.unsplash.com/photo-1584844600340-15e83072127e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80",
-          categoty: "Vegeterian"
-        },
-        {
-          name: "Musaka3",
-          ingredients:
-            "potatoes, yogurt, mince, mince, potatoes, yogurt, mince",
-          thumbnail:
-            "https://images.unsplash.com/photo-1584844600340-15e83072127e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80",
-          categoty: "Vegeterian"
-        },
-        {
-          name: "Musaka4",
-          ingredients:
-            "potatoes, yogurt, mince, mince, potatoes, yogurt, mince",
-          thumbnail:
-            "https://images.unsplash.com/photo-1584844600340-15e83072127e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80",
-          categoty: "Vegeterian"
-        },
-        {
-          name: "Musaka5",
-          ingredients:
-            "potatoes, yogurt, mince, mince, potatoes, yogurt, mince",
-          thumbnail:
-            "https://images.unsplash.com/photo-1584844600340-15e83072127e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80",
-          categoty: "Vegeterian"
-        },
-        {
-          name: "Musaka6",
-          ingredients:
-            "potatoes, yogurt, mince, mince, potatoes, yogurt, mince",
-          thumbnail:
-            "https://images.unsplash.com/photo-1584844600340-15e83072127e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80",
-          categoty: "Vegeterian"
-        }
-      ]
-    };
+  data() { return { }; },
+  methods: {
+    ...mapActions(['fetchRecipes', 'deleteRecipe']),
+  },
+  computed: mapGetters(['allRecipes']),
+  created() {
+    this.fetchRecipes();
   }
 };
 </script>

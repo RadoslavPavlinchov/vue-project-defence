@@ -16,7 +16,8 @@
       <router-link to="/"><v-toolbar-title>{{appTitle}}</v-toolbar-title></router-link>
       <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/categories">All Categories</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
-      <router-link to="/recipedetails">Product</router-link>
+      <v-btn color="green lighten-1" class="hidden-sm-and-down" to="/create" ms-2>Create Recipe</v-btn>
+      <v-btn color="green lighten-1" class="hidden-sm-and-down" to="/recipe">Recipe</v-btn>
       <v-btn color="green lighten-1" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
       <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/register">Register</v-btn>
     </v-app-bar>

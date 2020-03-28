@@ -1,5 +1,7 @@
 <template>
     <span>
+        <app-create></app-create>
+        <app-filter></app-filter>
         <app-recipes></app-recipes>
         <app-landing></app-landing>
         <app-landing-details></app-landing-details>
@@ -12,6 +14,8 @@ import AppLanding from '@/components/Landing';
 import AppLandingDetails from '@/components/LandingDetails';
 import AppCategories from '@/components/Categories';
 import AppRecipes from '@/components/core/Recipes';
+import AppCreate from '@/components/Create';
+import AppFilter from '@/components/Filter';
 
 export default {
     name: 'AppHome',
@@ -19,7 +23,9 @@ export default {
         AppLanding,
         AppLandingDetails,
         AppCategories,
-        AppRecipes
+        AppRecipes,
+        AppCreate,
+        AppFilter
     },
 };
 </script>
