@@ -15,7 +15,7 @@ const actions = {
         commit('setRecipes', response.data);
     },
     async createRecipe({ commit }, title) {
-        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', { title, completed: false });
+        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', { title });
 
         commit('createRecipe', response.data);
     },

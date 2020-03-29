@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submitHandler">
     <fieldset>
-      <h1>Registration</h1>
+      <h1>Register</h1>
 
       <p class="field field-icon">
         <label for="username">
@@ -15,7 +15,7 @@
           id="username"
           v-model="username"
           @blur="$v.username.$touch"
-          placeholder="MarkUlrich"
+          placeholder="Username..."
         />
       </p>
 
@@ -36,7 +36,7 @@
           id="email"
           v-model="email"
           @blur="$v.email.$touch"
-          placeholder="marg@gmial.com"
+          placeholder="example@example.com"
         />
       </p>
 

@@ -15,7 +15,7 @@
           id="username"
           v-model="username"
           @blur="$v.username.$touch"
-          placeholder="MarkUlrich"
+          placeholder="Username..."
         />
       </p>
 
