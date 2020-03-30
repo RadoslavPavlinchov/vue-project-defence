@@ -113,6 +113,8 @@ import {
   maxLength,
   helpers
 } from "vuelidate/lib/validators";
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
 const alphanumeric = helpers.regex("alpha", /^[a-zA-Z0-9]*$/);
 
@@ -148,10 +150,22 @@ export default {
     }
   },
   methods: {
-    submitHandler() {
-      this.$v.$touch();
-      if (this.$v.$error) { return; }
-      console.log(this.username, this.password, this.email, this.rePassword);
+    async submitHandler() {
+      try {
+        const user = firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password);
+          console.log(user);
+          this.$router.replace({name: "home"})
+      } catch (error) {
+        // this.$v.$touch();
+        // if (this.$v.$error) {
+        //   return;
+        // }
+        console.log(error);
+      }
+
+      // console.log(this.username, this.password, this.email, this.rePassword);
     }
   }
 };
@@ -183,7 +197,7 @@ select {
 }
 
 button {
-  background-color: #66BB6A;
+  background-color: #66bb6a;
   color: white;
   border: none;
   border-radius: 3px;

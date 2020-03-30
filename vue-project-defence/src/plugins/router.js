@@ -7,10 +7,11 @@ import Register from '@/components/auth/Register.vue';
 import Categories from '@/components/Categories.vue';
 import Recipe from '@/components/shared/Recipe.vue';
 import Create from '@/components/Create.vue'
+import Profile from '@/components/core/Profile.vue'
 
 const routes = [
-    {path: '/', component: Home},
-    {path: '/signin', component: Signin},
+    {path: '/', name: "home", component: Home},
+    {path: '/signin', name: "signin", component: Signin},
     {path: '/register', component: Register},
     {path: '/categories', component: Categories},
     {
@@ -21,6 +22,11 @@ const routes = [
     {
       path: '/create',
       component: Create,
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
     },
 ]
 

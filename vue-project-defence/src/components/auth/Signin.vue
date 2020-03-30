@@ -13,14 +13,14 @@
           type="text"
           name="username"
           id="username"
-          v-model="username"
-          @blur="$v.username.$touch"
+          v-model="email"
+          @blur="$v.email.$touch"
           placeholder="Username..."
         />
       </p>
 
-      <template v-if="$v.username.$error">
-        <p v-if="!$v.username.required" class="error">Username is required!</p>
+      <template v-if="$v.email.$error">
+        <p v-if="!$v.email.required" class="error">Email is required!</p>
       </template>
 
       <p class="field field-icon">
@@ -44,7 +44,7 @@
       </template>
 
       <p>
-        <button @click="login()">Create Account</button>
+        <button>Sign In</button>
       </p>
 
       <p class="text-center">
@@ -58,18 +58,20 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
 export default {
   name: "AppSignIn",
   mixins: [validationMixin],
   data() {
     return {
-      username: "",
+      email: "",
       password: ""
     };
   },
   validations: {
-    username: {
+    email: {
       required,
     },
     password: {
@@ -77,13 +79,15 @@ export default {
     }
   },
   methods: {
-    submitHandler() {
-      this.$v.$touch();
-      if (this.$v.$error) { return; }
-      console.log(this.username, this.password);
-    },
-    login() {
-      this.$router.push('/')
+    async submitHandler() {
+      try {
+        const data = firebase.auth().signInWithEmailAndPassword(this.email, this.password);
+        console.log(data);
+        this.$router.replace({name: "profile"})
+      } catch (error) {
+        console.log(error);
+      }
+
     }
   }
 };
