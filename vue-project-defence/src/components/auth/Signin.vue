@@ -11,11 +11,11 @@
         </label>
         <input
           type="text"
-          name="username"
-          id="username"
+          name="email"
+          id="email"
           v-model="email"
           @blur="$v.email.$touch"
-          placeholder="Username..."
+          placeholder="Email..."
         />
       </p>
 

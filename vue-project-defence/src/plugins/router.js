@@ -15,7 +15,8 @@ const routes = [
     {path: '/register', component: Register},
     {path: '/categories', component: Categories},
     {
-      path: '/recipe/:id',
+      path: '/recipe-details/:id',
+      name: 'recipe-details',
       component: Recipe,
       params: true
     },

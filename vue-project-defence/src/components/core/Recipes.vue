@@ -3,29 +3,31 @@
     <h1>Recipes Page</h1>
     <div class="recipe-container">
       <div v-for="recipe in allRecipes" :key="recipe.id">
+        <router-link :to='{ name: "recipe-details", params: { id: recipe.id }}'>
         <div class="recipe-box">
-          <div>
-            <h3>{{recipe.title}}</h3>
-            {{recipe.body}}
-          </div>
+            <img
+              src="https://images.unsplash.com/photo-1444731961956-751ed90465a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+            />
+            <div>
+              <h3>{{recipe.title}}</h3>
+              <div>{{recipe.body}}</div>
+            </div>
           <button @click="deleteRecipe(recipe.id)">Delete</button>
         </div>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AppRecipes",
   methods: {
-    ...mapActions(['fetchRecipes', 'deleteRecipe']),
+    ...mapActions(["deleteRecipe"])
   },
-  computed: mapGetters(['allRecipes']),
-  created() {
-    this.fetchRecipes();
-  }
+  computed: mapGetters(["allRecipes"]),
 };
 </script>
 

@@ -5,7 +5,7 @@ const state = {
 };
 
 const getters = {
-    allRecipes: state => state.recipes
+    allRecipes: state => state.recipes,
 };
 
 const actions = {
@@ -31,6 +31,7 @@ const actions = {
         commit('setRecipes', response.data)
     }
     // add update
+    
 };
 
 const mutations = {
