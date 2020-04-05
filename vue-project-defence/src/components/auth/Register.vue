@@ -97,7 +97,7 @@
 
       <p class="text-center">
         Have an account?
-        <a href>Sign In</a>
+        <router-link to="/signin">Sign In</router-link>
       </p>
     </fieldset>
   </form>
@@ -113,8 +113,10 @@ import {
   maxLength,
   helpers
 } from "vuelidate/lib/validators";
-import * as firebase from "firebase/app";
+// import * as firebase from "firebase/app";
 import "firebase/auth";
+
+import authAxios from "../../axios/axios-auth";
 
 const alphanumeric = helpers.regex("alpha", /^[a-zA-Z0-9]*$/);
 
@@ -150,22 +152,41 @@ export default {
     }
   },
   methods: {
-    async submitHandler() {
-      try {
-        const user = firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password);
-          console.log(user);
-          this.$router.replace({name: "home"})
-      } catch (error) {
-        // this.$v.$touch();
-        // if (this.$v.$error) {
-        //   return;
-        // }
-        console.log(error);
+    // async submitHandler() {
+    //   try {
+    //     const user = firebase
+    //       .auth()
+    //       .createUserWithEmailAndPassword(this.email, this.password);
+    //       console.log(user);
+    //       this.$router.replace({name: "home"})
+    //   } catch (error) {
+    //     // this.$v.$touch();
+    //     // if (this.$v.$error) {
+    //     //   return;
+    //     // }
+    //     console.log(error);
+    //   }
+
+    //   // console.log(this.username, this.password, this.email, this.rePassword);
+    // }
+
+    submitHandler() {
+      const payload = {
+        email: this.email,
+        password: this.password,
+        returnSecureToken: true
       }
 
-      // console.log(this.username, this.password, this.email, this.rePassword);
+      authAxios.post("/accounts:signUp", payload)
+        .then(res => {
+          const { idToken, localId } = res.data;
+          localStorage.setItem('token', idToken);
+          localStorage.setItem('userId', localId);
+          this.$router.push('/');
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
   }
 };

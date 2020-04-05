@@ -9,10 +9,20 @@ import Recipe from '@/components/shared/Recipe.vue';
 import Create from '@/components/Create.vue'
 import Profile from '@/components/core/Profile.vue'
 
+Vue.use(VueRouter)
+
+function anonymousGuard(to, from, next) {
+  if (localStorage.getItem('token') !== null) {
+      next('/');
+  } else {
+      next();
+  }
+}
+
 const routes = [
     {path: '/', name: "home", component: Home},
-    {path: '/signin', name: "signin", component: Signin},
-    {path: '/register', component: Register},
+    {path: '/signin', name: "signin", component: Signin, beforeEnter: anonymousGuard},
+    {path: '/register', component: Register, beforeEnter: anonymousGuard},
     {path: '/categories', component: Categories},
     {
       path: '/recipe-details/:id',
@@ -30,8 +40,6 @@ const routes = [
       component: Profile,
     },
 ]
-
-Vue.use(VueRouter)
 
 export default new VueRouter({
   mode: 'history',

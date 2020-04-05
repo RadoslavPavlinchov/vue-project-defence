@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import axiosDb from "../../axios/axios-database";
 
 const state = {
     recipes: []
@@ -10,26 +11,27 @@ const getters = {
 
 const actions = {
     async fetchRecipes({ commit }) {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        const response = await axiosDb.get('recipes.json');
         
         commit('setRecipes', response.data);
     },
-    async createRecipe({ commit }, title) {
-        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', { title });
+    // async createRecipe({ commit }, title) {
+    //     const response = await axios.post('https://jsonplaceholder.typicode.com/posts', { title });
 
-        commit('createRecipe', response.data);
-    },
-    async deleteRecipe({ commit }, id) {
-        await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
+    //     commit('createRecipe', response.data);
+    // },
+    // async deleteRecipe({ commit }, id) {
+    //     await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
 
-        commit('deleteRecipe', id);
-    },
-    async filterRecipes({ commit }, e) {
-        const limit = parseInt(e.target.options[e.target.options.selectedIndex].innerText);
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
+    //     commit('deleteRecipe', id);
+    // },
+    // async filterRecipes({ commit }, e) {
+    //     const limit = parseInt(e.target.options[e.target.options.selectedIndex].innerText);
+    //     const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
 
-        commit('setRecipes', response.data)
-    }
+    //     commit('setRecipes', response.data)
+    // }
+
     // add update
     
 };

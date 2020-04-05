@@ -27,5 +27,11 @@ export default {
         AppCreate,
         AppFilter
     },
+    props: {
+        isAuth: Boolean
+    },
+    beforeCreate() {
+    this.$emit('onAuth', localStorage.getItem('token') !== null);
+  },
 };
 </script>

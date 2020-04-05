@@ -5,12 +5,10 @@
       <div v-for="recipe in allRecipes" :key="recipe.id">
         <router-link :to='{ name: "recipe-details", params: { id: recipe.id }}'>
         <div class="recipe-box">
-            <img
-              src="https://images.unsplash.com/photo-1444731961956-751ed90465a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-            />
+            <img :src="recipe.img" />
             <div>
               <h3>{{recipe.title}}</h3>
-              <div>{{recipe.body}}</div>
+              <div>{{recipe.ingredients}}</div>
             </div>
           <button @click="deleteRecipe(recipe.id)">Delete</button>
         </div>
@@ -27,7 +25,9 @@ export default {
   methods: {
     ...mapActions(["deleteRecipe"])
   },
-  computed: mapGetters(["allRecipes"]),
+  computed: {
+    ...mapGetters(["allRecipes"])
+  },
 };
 </script>
 

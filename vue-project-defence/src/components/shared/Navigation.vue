@@ -17,30 +17,33 @@
       <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/categories">All Categories</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <v-btn color="green lighten-1" class="hidden-sm-and-down" to="/create" ms-2>Create Recipe</v-btn>
-      <v-btn v-if="!loggedIn" color="green lighten-1" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
-      <v-btn v-if="!loggedIn" color="green lighten-1" class="hidden-sm-and-down ms-2" to="/register">Register</v-btn>
-      <v-btn v-if="loggedIn" color="green lighten-1" class="hidden-sm-and-down ms-2" >Profile</v-btn>
-      <v-btn v-if="loggedIn" color="green lighten-1" class="hidden-sm-and-down ms-2" @click="signOut">Logout</v-btn>
+      <v-btn v-if="!isAuth" color="green lighten-1" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
+      <v-btn v-if="!isAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" to="/register">Register</v-btn>
+      <v-btn v-if="isAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" to="/profile">Profile</v-btn>
+      <v-btn v-if="isAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" @click="signOut">Logout</v-btn>
     </v-app-bar>
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
   </span>
 </template>
 
 <script>
-import * as firebase from "firebase/app";
+// import * as firebase from "firebase/app";
 import "firebase/auth";
 export default {
   name: "AppNavigation",
-  created() {
-    firebase.auth().onAuthStateChanged(user => {
-      // this.loggedIn = !user;
-      if(user) {
-        this.loggedIn = true;
-      } else {
-        this.loggedIn = false;
-      }
-    })
+  props: {
+    isAuth: Boolean
   },
+  // created() {
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     // this.loggedIn = !user;
+  //     if(user) {
+  //       this.loggedIn = true;
+  //     } else {
+  //       this.loggedIn = false;
+  //     }
+  //   })
+  // },
   data: () => ({
     appTitle: "TASTE THE HEALTHY ONES",
     drawer: false,
@@ -49,18 +52,25 @@ export default {
         { title: "Sign In" }, 
         { title: "Join" },
         ],
-    loggedIn: false
+    // loggedIn: false
   }),
   methods: {
-    async signOut() {
-      try {
-        const data = firebase.auth().signOut();
-        console.log(data);
-        this.$router.replace({name: "signin"})
-      } catch (error) {
-        console.log(error);
-      }
-      
+    // async signOut() {
+    //   try {
+    //     const data = firebase.auth().signOut();
+    //     console.log(data);
+    //     this.$router.replace({name: "signin"})
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+    signOut() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+
+      this.$emit('onAuth', false)
+
+      this.$router.replace({name: "signin"})
     }
   }
 };

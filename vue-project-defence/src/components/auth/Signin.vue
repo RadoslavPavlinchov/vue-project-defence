@@ -49,7 +49,7 @@
 
       <p class="text-center">
         Don't have an account?
-        <a href>Register</a>
+          <router-link to="/register">Register</router-link>
       </p>
     </fieldset>
   </form>
@@ -58,8 +58,10 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
-import * as firebase from "firebase/app";
+// import * as firebase from "firebase/app";
 import "firebase/auth";
+
+import authAxios from "../../axios/axios-auth";
 
 export default {
   name: "AppSignIn",
@@ -79,18 +81,41 @@ export default {
     }
   },
   methods: {
-    async submitHandler() {
-      try {
-        const data = firebase.auth().signInWithEmailAndPassword(this.email, this.password);
-        console.log(data);
-        this.$router.replace({name: "profile"})
-      } catch (error) {
-        console.log(error);
-      }
+    // async submitHandler() {
+    //   try {
+    //     const data = firebase.auth().signInWithEmailAndPassword(this.email, this.password);
+    //     console.log(data);
+    //     this.$router.replace({name: "profile"})
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
 
+    // }
+
+        submitHandler() {
+      const payload = {
+        email: this.email,
+        password: this.password,
+        returnSecureToken: true
+      };
+      // Project Settings -> Web API key
+      authAxios
+        .post(
+          '/accounts:signInWithPassword',
+          payload
+        )
+        .then(res => {
+          const { idToken, localId } = res.data;
+          localStorage.setItem("token", idToken);
+          localStorage.setItem("userId", localId);
+          this.$router.push("/");
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
   }
-};
+}
 </script>
 
 
