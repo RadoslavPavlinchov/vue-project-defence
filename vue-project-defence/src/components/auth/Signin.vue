@@ -120,9 +120,10 @@ export default {
 
 
 <style scoped>
+
 form {
-  margin-top: 20px;
-  width: 30%;
+  margin: auto auto;
+  width: 40%;
 }
 
 fieldset {

@@ -12,8 +12,15 @@ const getters = {
 const actions = {
     async fetchRecipes({ commit }) {
         const response = await axiosDb.get('recipes.json');
-        
-        commit('setRecipes', response.data);
+        let posts = [];
+        const allPostsRes = response.data;
+        for (const postId in allPostsRes) {
+            posts.push({
+                postId,
+                ...allPostsRes[postId]
+            });
+        }
+        commit('setRecipes', posts);
     },
     // async createRecipe({ commit }, title) {
     //     const response = await axios.post('https://jsonplaceholder.typicode.com/posts', { title });
@@ -33,7 +40,7 @@ const actions = {
     // }
 
     // add update
-    
+
 };
 
 const mutations = {

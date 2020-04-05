@@ -2,13 +2,13 @@
   <v-app>
     <app-navigation @onAuth="isAuth = $event" :isAuth="isAuth"></app-navigation>
       <router-view @onAuth="isAuth = $event" :isAuth="isAuth"></router-view>
-    <!-- <app-footer></app-footer> -->
+    <app-footer></app-footer>
   </v-app>
 </template>
 
 <script>
 import AppNavigation from "./components/shared/Navigation";
-// import AppFooter from '@/components/shared/Footer';
+import AppFooter from '@/components/shared/Footer';
 
 // import { mapActions } from "vuex";
 
@@ -17,7 +17,7 @@ export default {
 
   components: {
     AppNavigation,
-    // AppFooter,
+    AppFooter,
   },
   //   methods: {
   //   ...mapActions(["fetchRecipes"])

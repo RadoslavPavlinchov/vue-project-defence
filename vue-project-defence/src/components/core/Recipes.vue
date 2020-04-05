@@ -1,21 +1,29 @@
 <template>
-  <div class="recipes">
-    <h1>Recipes Page</h1>
-    <div class="recipe-container">
-      <div v-for="recipe in allRecipes" :key="recipe.id">
-        <router-link :to='{ name: "recipe-details", params: { id: recipe.id }}'>
-        <div class="recipe-box">
-            <img :src="recipe.img" />
-            <div>
-              <h3>{{recipe.title}}</h3>
-              <div>{{recipe.ingredients}}</div>
-            </div>
-          <button @click="deleteRecipe(recipe.id)">Delete</button>
-        </div>
-        </router-link>
-      </div>
-    </div>
-  </div>
+  <v-container grid-list-lg>
+    <v-layout row wrap>
+      <v-flex xs12 sm6 md6 lg4 v-for="recipe in allRecipes" :key="recipe.id">
+        <v-card>
+          <v-responsive>
+            <v-img
+              src="https://images.unsplash.com/photo-1559978137-8c560d91e9e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
+            ></v-img>
+          </v-responsive>
+
+          <v-card-text>
+            <div class="title">{{recipe.title}}</div>
+
+            <div class="subheading">Ingredients</div>
+            <ul>
+              <li v-for="(ingredient, i) in recipe.ingredients" :key="i">{{ingredient}}</li>
+            </ul>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="green" dark :to='{ name: "recipe-details", params: { id: recipe.id }}'>Details</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -27,7 +35,7 @@ export default {
   },
   computed: {
     ...mapGetters(["allRecipes"])
-  },
+  }
 };
 </script>
 

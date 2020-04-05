@@ -29,7 +29,7 @@
           </v-card-text>
 
           <v-card-actions v-if="['/categories'].includes($route.path)">
-            <v-btn outlined block color="green" @click="showRecipes('normal')">Select This Plan</v-btn>
+            <v-btn outlined block color="green" to="/recipes">Select This Plan</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -57,7 +57,7 @@
             </div>
           </v-card-text>
           <v-card-actions v-if="['/categories'].includes($route.path)">
-            <v-btn outlined block color="green" @click="showRecipes('vegeterian')">Select This Plan</v-btn>
+            <v-btn outlined block color="green" to="/recipes">Select This Plan</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -86,7 +86,7 @@
           </v-card-text>
 
            <v-card-actions v-if="['/categories'].includes($route.path)">
-            <v-btn outlined block color="green" @click="showRecipes('vegan')">Select This Plan</v-btn>
+            <v-btn outlined block color="green" to="/recipes">Select This Plan</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
