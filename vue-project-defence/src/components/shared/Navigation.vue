@@ -13,7 +13,7 @@
     <v-app-bar color="green darken-3" dark>
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
-      <router-link to="/"><v-toolbar-title>{{appTitle}}</v-toolbar-title></router-link>
+      <v-toolbar-title class="pointer"><router-link to="/" tag="span">{{appTitle}}</router-link></v-toolbar-title>
       <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/categories">All Categories</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <v-btn color="green lighten-1" class="hidden-sm-and-down" to="/create" ms-2>Create Recipe</v-btn>
@@ -77,8 +77,11 @@ export default {
 </script>
 
 <style scoped>
-.v-toolbar__title{
+/* .v-toolbar__title{
   color: white;
   text-decoration: none;
+} */
+.pointer {
+  cursor: pointer;
 }
 </style>

@@ -2,7 +2,11 @@
 import axiosDb from "../../axios/axios-database";
 
 const state = {
-    recipes: []
+    recipes: [],
+    users: {
+        id: 'dsajdhkasjhdsadasd',
+        createdRecipes: ['daskjdhasjhdikasjhd']
+    }
 };
 
 const getters = {
@@ -22,11 +26,16 @@ const actions = {
         }
         commit('setRecipes', posts);
     },
-    // async createRecipe({ commit }, title) {
-    //     const response = await axios.post('https://jsonplaceholder.typicode.com/posts', { title });
+    async createRecipe({ commit }, {recipe, img, description, ingredients}) {
+        const response = await axiosDb.post('recipes.json', { 
+            recipe,
+            img,
+            description,
+            ingredients,
+        });
 
-    //     commit('createRecipe', response.data);
-    // },
+        commit('createRecipe', response.data);
+    },
     // async deleteRecipe({ commit }, id) {
     //     await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
 

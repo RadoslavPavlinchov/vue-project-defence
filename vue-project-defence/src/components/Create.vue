@@ -19,7 +19,7 @@
           <label for="ingredients">Ingredients</label>
           <input type="text" id="ingredients" v-model="recipe.ingredients" />
         </div>
-        <v-btn color="green lighten-1" dark @click="createRecipe">Create Recipe</v-btn>
+        <v-btn color="green lighten-1" dark @click="createRecipeHere">Create Recipe</v-btn>
       </v-col>
       <v-col md="9" cols="12">
 
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex'
 export default {
   name: "AppCreate",
   data() {
@@ -56,8 +56,9 @@ export default {
     };
   },
   methods: {
-    createRecipe() {
-      console.log('Hello');
+    ...mapActions(['createRecipe']),
+    createRecipeHere() {
+      this.createRecipe(this.recipe)
     }
   }
 };
