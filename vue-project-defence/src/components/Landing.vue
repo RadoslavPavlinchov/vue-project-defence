@@ -1,12 +1,9 @@
 <template>
-    <v-container fluid fill-height class="landing" style="max-height: 100vh;">
+    <v-container fluid fill-height class="landing" style="max-height">
         <v-layout justify-center align-center column pa-5>
             <div class="display-4 white--text font-weight-bold">HEALTHY MEALS</div>
             <div class="display-4 white--text font-weight-bold">FOR YOUR TABLE</div>
             <div class="display-1 white--text">Finally find a place where you can get all of your recipes at once.</div>
-            <v-btn class="green lighten-1">
-            <v-icon color="white">expand_more</v-icon>
-            </v-btn>
         </v-layout>
     </v-container>
 </template>
@@ -19,9 +16,9 @@ export default {
 
 <style scoped>
 .landing {
-    background-image: url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80');
+    background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
     background-size: cover;
-    background-attachment: fixed;
-    background-size: 100% 100%;
+    /* background-attachment: fixed;
+    background-size: 100% 100%; */
 }
 </style>
