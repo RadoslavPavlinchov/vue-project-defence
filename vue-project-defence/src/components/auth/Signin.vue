@@ -1,5 +1,9 @@
 <template>
-  <form @submit.prevent="submitHandler">
+  <span>
+    <span v-if="error">
+    <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+    </span>
+  <form @submit.prevent="onSignIn">
     <fieldset>
       <h1>Sign In</h1>
 
@@ -44,24 +48,22 @@
       </template>
 
       <p>
-        <button>Sign In</button>
+        <button :disabled="loading" :loading="loading">Sign In</button>
       </p>
 
       <p class="text-center">
         Don't have an account?
-          <router-link to="/register">Register</router-link>
+        <router-link to="/register">Register</router-link>
       </p>
     </fieldset>
   </form>
+  </span>
+
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
-// import * as firebase from "firebase/app";
-import "firebase/auth";
-
-import authAxios from "../../axios/axios-auth";
 
 export default {
   name: "AppSignIn",
@@ -74,53 +76,46 @@ export default {
   },
   validations: {
     email: {
-      required,
+      required
     },
     password: {
-      required,
+      required
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    },
+    error() {
+      return this.$store.getters.error
+    },
+    loading() {
+      return this.$store.getters.loading
+    }
+  },
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("/");
+      }
     }
   },
   methods: {
-    // async submitHandler() {
-    //   try {
-    //     const data = firebase.auth().signInWithEmailAndPassword(this.email, this.password);
-    //     console.log(data);
-    //     this.$router.replace({name: "profile"})
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-
-    // }
-
-        submitHandler() {
-      const payload = {
+    onSignIn() {
+      this.$store.dispatch("signUserIn", {
         email: this.email,
-        password: this.password,
-        returnSecureToken: true
-      };
-      // Project Settings -> Web API key
-      authAxios
-        .post(
-          '/accounts:signInWithPassword',
-          payload
-        )
-        .then(res => {
-          const { idToken, localId } = res.data;
-          localStorage.setItem("token", idToken);
-          localStorage.setItem("userId", localId);
-          this.$router.push("/");
-        })
-        .catch(err => {
-          console.error(err);
-        });
+        password: this.password
+      });
+    },
+    onDismissed() {
+      this.$error.dispatch('clearError')
     }
   }
-}
+};
 </script>
 
 
 <style scoped>
-
 form {
   margin: auto auto;
   width: 30%;
@@ -145,7 +140,7 @@ select {
 }
 
 button {
-  background-color: #66BB6A;
+  background-color: #66bb6a;
   color: white;
   border: none;
   border-radius: 3px;

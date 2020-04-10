@@ -97,11 +97,6 @@
 <script>
 export default {
   name: "AppCategories",
-  methods: {
-      showRecipes() {
-          console.log('Hello');
-      }
-  }
 };
 </script>
 

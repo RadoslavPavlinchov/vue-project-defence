@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitHandler">
+  <form @submit.prevent="onRegister">
     <fieldset>
       <h1>Register</h1>
 
@@ -113,10 +113,6 @@ import {
   maxLength,
   helpers
 } from "vuelidate/lib/validators";
-// import * as firebase from "firebase/app";
-import "firebase/auth";
-
-import authAxios from "../../axios/axios-auth";
 
 const alphanumeric = helpers.regex("alpha", /^[a-zA-Z0-9]*$/);
 
@@ -151,43 +147,22 @@ export default {
       sameAs: sameAs("password")
     }
   },
-  methods: {
-    // async submitHandler() {
-    //   try {
-    //     const user = firebase
-    //       .auth()
-    //       .createUserWithEmailAndPassword(this.email, this.password);
-    //       console.log(user);
-    //       this.$router.replace({name: "home"})
-    //   } catch (error) {
-    //     // this.$v.$touch();
-    //     // if (this.$v.$error) {
-    //     //   return;
-    //     // }
-    //     console.log(error);
-    //   }
-
-    //   // console.log(this.username, this.password, this.email, this.rePassword);
-    // }
-
-    submitHandler() {
-      const payload = {
-        email: this.email,
-        password: this.password,
-        returnSecureToken: true
-      }
-
-      authAxios.post("/accounts:signUp", payload)
-        .then(res => {
-          const { idToken, localId } = res.data;
-          localStorage.setItem('token', idToken);
-          localStorage.setItem('userId', localId);
-          this.$router.push('/');
-        })
-        .catch(err => {
-          console.error(err);
-        });
+  computed: {
+    user () {
+      return this.$store.getters.user
     }
+  },
+  watch: {
+    user (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/')
+      }
+    }
+  },
+  methods: {
+  onRegister() {
+      this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
+  }
   }
 };
 </script>

@@ -1,52 +1,4 @@
 <template>
-  <!-- <v-container>
-    <v-row>
-      <v-col md="3" cols="12">
-        <h1>Create recipe</h1>
-        <div class="field">
-          <label for="title">Title</label>
-          <input type="text" id="title" v-model="title" />
-        </div>
-        <div class="field">
-          <label for="thumbnail">Thumbnail URL</label>
-          <input type="text" id="thumbnail" v-model="imageUrl" />
-        </div>
-        <div class="field">
-          <label for="ingredients">Ingredients</label>
-          <input type="text" id="ingredients" v-model="ingredients" />
-        </div>
-        <div class="field">
-          <label for="description">Description</label>
-          <input type="text" id="description" v-model="description" />
-        </div>
-        <v-btn
-          color="green lighten-1"
-          dark
-          :disabled="!formIsValid"
-          @click="createRecipeHere"
-        >Create Recipe</v-btn>
-      </v-col>
-      <v-col md="9" cols="12">
-        <v-card width="700" height="700" class="mx-auto">
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title class="headline">{{title}}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-img :src="imageUrl"></v-img>
-
-          <v-card-text>{{description}}</v-card-text>
-
-          <v-card-text>
-            <ul>
-              <li v-for="(ingredient, i) in ingredients" :key="i">ingredient</li>
-            </ul>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>-->
   <v-container>
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
@@ -119,7 +71,6 @@
 </template>
 
 <script>
-// import { mapActions } from "vuex"; //reverted back
 export default {
   name: "AppCreate",
   data() {
@@ -145,9 +96,7 @@ export default {
     }
   },
   methods: {
-    // ...mapActions(["createRecipe"]),  //reverted back
     onCreateRecipe() {
-      // this.createRecipe(this.recipe);
       if (!this.formIsValid) {
         return;
       }
@@ -157,12 +106,10 @@ export default {
       const recipeObj = {
         title: this.title,
         description: this.description,
-        // creatorId: this.title,
         image: this.image,
         ingredients: this.ingredients,
         date: new Date()
       };
-      // this.createRecipe(recipeObj);
       this.$store.dispatch("createRecipe", recipeObj);
       this.$router.push("/recipes");
     },

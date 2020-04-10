@@ -18,7 +18,5 @@ export default {
 .landing {
     background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
     background-size: cover;
-    /* background-attachment: fixed;
-    background-size: 100% 100%; */
 }
 </style>
