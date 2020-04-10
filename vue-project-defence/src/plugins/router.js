@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import authGuard from './auth-guard'
 
 import Home from '@/components/Home.vue';
 import Categories from '@/components/Categories.vue';
@@ -9,22 +10,6 @@ import NotFound from '../components/shared/NotFound.vue'
 import Recipes from '@/components/core/Recipes.vue';
 
 Vue.use(VueRouter)
-
-function anonymousGuard(to, from, next) {
-  if (localStorage.getItem('token') !== null) {
-    next('/');
-  } else {
-    next();
-  }
-}
-
-function authGuard(to, from, next) {
-  if (localStorage.getItem('token') === null) {
-    next('/signin');
-  } else {
-    next();
-  }
-}
 
 const routes = [
   {
@@ -36,26 +21,27 @@ const routes = [
     path: '/signin',
     name: "signin",
     component: () => import('@/components/auth/Signin.vue'),
-    beforeEnter: anonymousGuard
   },
   {
     path: '/register',
     component: () => import('@/components/auth/Register.vue'),
-    beforeEnter: anonymousGuard
   },
   {
     path: '/categories',
-    component: Categories
+    component: Categories,
+    beforeEnter: authGuard
   },
   {
     path: '/recipe-details/:id',
     name: 'recipe-details',
     component: Recipe,
-    params: true
+    props: true,
+    beforeEnter: authGuard
   },
   {
     path: '/create',
-    component: () => import('@/components/Create.vue')
+    component: () => import('@/components/Create.vue'),
+    beforeEnter: authGuard
   },
   {
     path: '/profile',
@@ -65,7 +51,8 @@ const routes = [
   },
   {
     path: '/recipes',
-    component: Recipes
+    component: Recipes,
+    beforeEnter: authGuard
   },
   {
     path: '*',
