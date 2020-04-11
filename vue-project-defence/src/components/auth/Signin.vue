@@ -109,6 +109,7 @@ export default {
     },
     onDismissed() {
       this.$error.dispatch('clearError')
+      
     }
   }
 };

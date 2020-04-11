@@ -9,12 +9,10 @@ import store from './store'
 
 import DateFilter from './filters/date'
 import Alert from './components/shared/Alert.vue'
-import Edit from './components/core/Edit.vue'
 import AddToFav from './components/user/AddToFav.vue'
 
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', Alert)
-Vue.component('app-edit', Edit)
 Vue.component('app-add-to-fav', AddToFav)
 
 Vue.config.productionTip = false

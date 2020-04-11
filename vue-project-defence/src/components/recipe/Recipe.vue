@@ -23,11 +23,14 @@
 </template>
 
 <script>
-import AppDelete from '../user/Delete.vue'
+import AppDelete from '../recipe/Delete.vue'
+import AppEdit from '../recipe/Edit'
+
 export default {
   name: "AppRecipe",
   components: {
-    AppDelete
+    AppDelete,
+    AppEdit
   },
   props: ["id"],
   computed: {

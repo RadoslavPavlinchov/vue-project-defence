@@ -3,11 +3,11 @@ import VueRouter from 'vue-router';
 import authGuard from './auth-guard'
 
 import Home from '@/components/Home.vue';
-import Categories from '@/components/Categories.vue';
-import Recipe from '@/components/shared/Recipe.vue';
-import Profile from '@/components/core/Profile.vue';
+import Categories from '@/components/core/Categories.vue';
+import Recipe from '@/components/recipe/Recipe.vue';
+import Profile from '@/components/user/Profile.vue';
 import NotFound from '../components/shared/NotFound.vue'
-import Recipes from '@/components/core/Recipes.vue';
+import Recipes from '@/components/recipe/Recipes.vue';
 
 Vue.use(VueRouter)
 
@@ -40,7 +40,7 @@ const routes = [
   },
   {
     path: '/create',
-    component: () => import('@/components/Create.vue'),
+    component: () => import('@/components/recipe/Create.vue'),
     beforeEnter: authGuard
   },
   {

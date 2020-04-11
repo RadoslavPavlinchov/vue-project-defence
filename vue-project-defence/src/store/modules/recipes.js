@@ -16,6 +16,19 @@ const getters = {
                 return recipe.id === recipeId
             })
         }
+    },  
+    userCreatedRecipes(state, getters) {
+        const userId = getters.user.id
+        let userRecipes = []
+        for (let item in getters.loadedRecipes) {
+            if (getters.loadedRecipes[item]['creatorId'] === userId) {
+                userRecipes.push(getters.loadedRecipes[item])
+            }
+        }
+        return userRecipes
+    },
+    userLikedRecipes(getters) {
+        return getters.user.favoriteRecipes
     }
 };
 

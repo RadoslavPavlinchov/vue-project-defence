@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import AppLanding from '@/components/Landing';
-import AppLandingDetails from '@/components/LandingDetails';
-import AppCategories from '@/components/Categories';
+import AppLanding from '@/components/core/Landing';
+import AppLandingDetails from '@/components/core/LandingDetails';
+import AppCategories from '@/components/core/Categories';
 
 export default {
     name: 'AppHome',
