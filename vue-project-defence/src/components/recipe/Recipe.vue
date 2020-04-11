@@ -25,12 +25,14 @@
 <script>
 import AppDelete from '../recipe/Delete.vue'
 import AppEdit from '../recipe/Edit'
+import AppAddToFav from '../user/AddToFav'
 
 export default {
   name: "AppRecipe",
   components: {
     AppDelete,
-    AppEdit
+    AppEdit,
+    AppAddToFav
   },
   props: ["id"],
   computed: {
