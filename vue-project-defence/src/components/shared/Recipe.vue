@@ -1,54 +1,52 @@
 <template>
-  <!-- <div>
-    <h1>This is the recipe details</h1>
-    <h3>{{this.$route.params.id}}</h3>
-    {{details}}
-  </div>-->
-  <v-card width="700" height="700" class="mx-auto">
+  <v-card width="700" height="auto" class="mx-auto">
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="headline">{{details.title}}</v-list-item-title>
+        <v-list-item-title class="headline">{{recipe.title}}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-
-    <v-img src="https://images.unsplash.com/photo-1559978137-8c560d91e9e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80" height="450"></v-img>
-
-    <v-card-text>Visit ten places on our planet that are undergoing the biggest changes today.</v-card-text>
-
+    <v-img :src="recipe.imageUrl"></v-img>
+    <v-card-text>Created: {{recipe.date | date}}</v-card-text>
+    <v-card-text>{{recipe.description}}</v-card-text>
     <v-card-text>
       <ul>
-        <li v-for="(ingredient, i) in details.ingredients" :key="i">{{ingredient}}</li>
+        <li v-for="(ingredient, i) in recipe.ingredients" :key="i">{{ingredient}}</li>
       </ul>
     </v-card-text>
-
     <v-card-actions>
-      <v-btn color="green lighten-1" dark>Edit</v-btn>
-      <v-btn color="green lighten-1" dark>Delete</v-btn> 
+      <app-edit :recipe="recipe" v-if="userIsCreator"></app-edit>
+      <app-delete :recipe="recipe" v-if="userIsCreator"></app-delete>
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+      <app-add-to-fav :recipeId="recipe.id" v-if="userIsAuth && !userIsCreator"></app-add-to-fav>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import AppDelete from '../user/Delete.vue'
 export default {
-  
   name: "AppRecipe",
-  props: ['recipe'],
+  components: {
+    AppDelete
+  },
+  props: ["id"],
   computed: {
-    details() {
-      return this.$store.state.recipes.recipes.find(
-        x => x.id === +this.$route.params.id
+    recipe() {
+      return this.$store.getters.loadedRecipe(this.id);
+    },
+    userIsAuth() {
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
       );
+    },
+    userIsCreator() {
+      if (!this.userIsAuth) {
+        return false;
+      }
+      return this.$store.getters.user.id === this.recipe.creatorId;
     }
-  },
-    methods: {
-    ...mapActions(["deleteRecipe"])
-  },
-
+  }
 };
 </script>
 

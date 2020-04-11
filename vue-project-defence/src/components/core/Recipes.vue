@@ -5,13 +5,13 @@
         <v-card>
           <v-responsive>
             <v-img
-              src="https://images.unsplash.com/photo-1559978137-8c560d91e9e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
+              :src="recipe.imageUrl"
             ></v-img>
           </v-responsive>
 
           <v-card-text>
             <div class="title">{{recipe.title}}</div>
-
+            <div>Created: {{recipe.date | date}}</div>
             <div class="subheading">Ingredients</div>
             <ul>
               <li v-for="(ingredient, i) in recipe.ingredients" :key="i">{{ingredient}}</li>
@@ -27,14 +27,13 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "AppRecipes",
-  methods: {
-    ...mapActions(["deleteRecipe"])
-  },
   computed: {
-    ...mapGetters(["allRecipes"])
+    allRecipes() {
+      return this.$store.getters.loadedRecipes
+    }
   }
 };
 </script>

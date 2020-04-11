@@ -1,6 +1,6 @@
 <template>
-  <v-card height="150">
-  <v-footer absolute color="green darken-3" dark class="font-weight-medium">
+  <v-card class="footer" >
+  <v-footer color="green darken-3" dark class="font-weight-medium">
     <v-col
       class="text-center"
       cols="12"

@@ -14,73 +14,43 @@
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
       <v-toolbar-title class="pointer"><router-link to="/" tag="span">{{appTitle}}</router-link></v-toolbar-title>
-      <v-btn color="green lighten-1" class="hidden-sm-and-down ms-2" to="/categories">All Categories</v-btn>
+      <v-btn v-if="userIsAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" to="/categories">All Categories</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
-      <v-btn color="green lighten-1" class="hidden-sm-and-down" to="/create" ms-2>Create Recipe</v-btn>
-      <v-btn v-if="!isAuth" color="green lighten-1" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
-      <v-btn v-if="!isAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" to="/register">Register</v-btn>
-      <v-btn v-if="isAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" to="/profile">Profile</v-btn>
-      <v-btn v-if="isAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" @click="signOut">Logout</v-btn>
+      <v-btn v-if="userIsAuth" color="green lighten-1" class="hidden-sm-and-down" to="/create" ms-2>Create Recipe</v-btn>
+      <v-btn v-if="!userIsAuth" color="green lighten-1" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
+      <v-btn v-if="!userIsAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" to="/register">Register</v-btn>
+      <v-btn v-if="userIsAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" to="/profile">Profile</v-btn>
+      <v-btn v-if="userIsAuth" color="green lighten-1" class="hidden-sm-and-down ms-2" @click="signOut">Logout</v-btn>
     </v-app-bar>
-        <!-- <router-view></router-view> -->
   </span>
 </template>
 
 <script>
-// import * as firebase from "firebase/app";
-import "firebase/auth";
 export default {
   name: "AppNavigation",
-  props: {
-    isAuth: Boolean
-  },
-  // created() {
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     // this.loggedIn = !user;
-  //     if(user) {
-  //       this.loggedIn = true;
-  //     } else {
-  //       this.loggedIn = false;
-  //     }
-  //   })
-  // },
   data: () => ({
     appTitle: "TASTE THE HEALTHY ONES",
     drawer: false,
     items: [
-        { title: "Menu" }, 
         { title: "Sign In" }, 
-        { title: "Join" },
+        { title: "Register" },
         ],
-    // loggedIn: false
   }),
   methods: {
-    // async signOut() {
-    //   try {
-    //     const data = firebase.auth().signOut();
-    //     console.log(data);
-    //     this.$router.replace({name: "signin"})
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
     signOut() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userId');
-
-      this.$emit('onAuth', false)
-
-      this.$router.replace({name: "signin"})
+      this.$store.dispatch('signUserOut')
+      this.$router.push('/')
+    }
+  },
+  computed: {
+    userIsAuth() {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
     }
   }
 };
 </script>
 
 <style scoped>
-/* .v-toolbar__title{
-  color: white;
-  text-decoration: none;
-} */
 .pointer {
   cursor: pointer;
 }

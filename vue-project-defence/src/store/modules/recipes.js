@@ -101,8 +101,7 @@ const actions = {
             })
     },
     deleteRecipe({ commit }, payload) {
-        // firebase.database().ref('recipes').child(payload.id).remove()
-        firebase.database().ref('recipes').child(payload.id).remove()
+        firebase.database().ref('recipes').child(payload).remove()
             .then(() => {
                 // commit('setLoading', false)
                 commit('deleteRecipe', payload)
