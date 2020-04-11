@@ -48,7 +48,7 @@
       </template>
 
       <p>
-        <button :disabled="loading" :loading="loading">Sign In</button>
+        <button>Sign In</button>
       </p>
 
       <p class="text-center">
@@ -109,7 +109,6 @@ export default {
     },
     onDismissed() {
       this.$error.dispatch('clearError')
-      
     }
   }
 };

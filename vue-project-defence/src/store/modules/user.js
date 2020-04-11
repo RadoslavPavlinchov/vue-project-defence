@@ -43,11 +43,11 @@ const actions = {
             })
     },
     signUserUp({ commit }, payload) {
-        commit('setLoading', true)
+        // commit('setLoading', true)
         commit('clearError')
         firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
             .then(user => {
-                commit('setLoading', false)
+                // commit('setLoading', false)
                 const newUser = {
                     id: user.user.uid,
                     favoriteRecipes: [],
@@ -56,17 +56,17 @@ const actions = {
                 commit('setUser', newUser)
             })
             .catch(error => {
-                commit('setLoading', true)
+                // commit('setLoading', true)
                 commit('setError', error)
                 console.log(error);
             })
     },
     signUserIn({ commit }, payload) {
-        commit('setLoading', true)
+        // commit('setLoading', true)
         commit('clearError')
         firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
             .then(user => {
-                commit('setLoading', false)
+                // commit('setLoading', false)
                 const newUser = {
                     id: user.uid,
                     createdRecipes: [],
@@ -75,7 +75,7 @@ const actions = {
                 commit('setUser', newUser)
             })
             .catch(error => {
-                commit('setLoading', true)
+                // commit('setLoading', true)
                 commit('setError', error)
                 console.log(error);
             })
@@ -87,7 +87,7 @@ const actions = {
             fireBaseKeys: {} })
     },
     fetchUserData({commit, getters}) {
-        commit('setLoading', true)
+        // commit('setLoading', true)
         firebase.database().ref('/users/' + getters.user.id + '/favorites/').once('value')
             .then(data => {
                 const dataPairs = data.val()

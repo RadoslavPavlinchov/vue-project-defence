@@ -5,7 +5,6 @@
     @input="onClose"
     type="warning"
     :value="true"
-
   >{{text}}</v-alert>
 </template>
 
